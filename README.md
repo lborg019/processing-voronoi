@@ -1,15 +1,16 @@
-# Processing-Voronoi
-Voronoi diagrams in Processing.
+# Processing: Voronoi / Lloyd Relaxation
 
-Requires the Lee Byron's [Mesh](http://leebyron.com/mesh/) processing library.
+![lloyd-relaxation-animation](./voronoi.gif)
 
-Code consists of creating 40 random points on the processing canvas and calculating their voronoi diagrams.
+Requires [toxiclibs](http://toxiclibs.org) processing library.
 
-todo:
-Accept user prompt for diagram generation
-User should be able to specify:
-- Background color
-- Line stroke
-- Amount of Voronoi cells 
-- Slack between cells and canvas' borders
-- Move all code to the Library structure (possible pull request)
+Download the library and unzip it to ~/Documents/Processing/Libraries
+
+Program might crash if constrained lloyd iteration takes place on a random set. Pressing the 'r' key generates a random, unconstrained voronoi diagram, which upon attempting to lloyd relax, crashes on the following method: 
+```java
+voronoi.addPoint(new Vec2D(centroids.get(i).x, centroids.get(i).y));
+```
+
+Apparently, there might be no triangles for a determined Delaunay vertex for such voronoi diagrams. Some sort of boundaries check or exception is still necessary.
+
+Program works for voronoi diagrams generated with the mouse (like on the .gif)
